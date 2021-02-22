@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{title}}</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.5.9/dist/css/uikit.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.5.9/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.5.9/dist/js/uikit-icons.min.js"></script>
+    <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+            integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
+            crossorigin="anonymous"
+    />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,300" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="global.css" />
+</head>
+<body>
+<div class="uk-container uk-margin">
+    <div class="uk-width-expand@m">
+        <h1 class="uk-heading-small">Walk Waterford</h1>
+    </div>
+    <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1" uk-slideshow>
+        <ul class="uk-slideshow-items">
+            <li>
+                <img data-src="images/greenway1800x1000.jpg" width="1800" height="1000" alt="image" uk-cover uk-img="target: !ul > :last-child, !* +*">
+            </li>
+            <li>
+                <img data-src="images/comeraghs1800x1000.jpg" width="1800" height="1000" alt="image" uk-cover uk-img="target: !* -*, !* +*">
+            </li>
+            <li>
+                <img data-src="images/greenway1800x1000.jpg" width="1800" height="1000" alt="image" uk-cover uk-img="target: !* -*, !ul > :first-child">
+            </li>
+        </ul>
+
+        <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slideshow-item="previous"></a>
+        <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slideshow-item="next"></a>
+
+    </div>
+</div>
+</body>
+</html>
