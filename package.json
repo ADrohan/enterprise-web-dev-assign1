@@ -1,0 +1,11 @@
+{
+  "name": "enterprise-web-dev-poi-assign1",
+  "version": "1.0.0",
+  "description": "points-of-interest",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
