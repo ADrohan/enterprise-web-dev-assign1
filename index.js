@@ -12,7 +12,7 @@ const server = Hapi.server({
 });
 
 server.bind({
-  currentUser: {},
+  //currentUser: {},
   users: [],
   pois: [],
 });
@@ -39,6 +39,7 @@ async function init() {
       password: "password-should-be-32-characters",
       isSecure: false,
     },
+    redirectTo: "/",
   });
   server.auth.default("session");
   server.route(require("./routes"));

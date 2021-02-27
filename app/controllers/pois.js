@@ -17,7 +17,9 @@ const Pois = {
   addpoi: {
     handler: function (request, h) {
       const data = request.payload;
-      data.user = this.currentUser;
+      var userEmail = request.auth.credentials.id;
+      //data.user = this.currentUser;
+      data.user = this.users[userEmail];
       this.pois.push(data);
       return h.redirect("/allpois");
     },

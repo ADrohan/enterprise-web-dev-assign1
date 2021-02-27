@@ -18,7 +18,8 @@ const Accounts = {
     handler: function (request, h) {
       const user = request.payload;
       this.users[user.email] = user;
-      this.currentUser = user;
+      //this.currentUser = user;
+      request.cookieAuth.set({ id: user.email });
       return h.redirect("/home");
     },
   },
@@ -33,7 +34,8 @@ const Accounts = {
     handler: function (request, h) {
       const user = request.payload;
       if (user.email in this.users && user.password === this.users[user.email].password) {
-        this.currentUser = this.users[user.email];
+        request.cookieAuth.set({ id: user.email });
+        //this.currentUser = this.users[user.email];
         return h.redirect("/home");
       }
       return h.redirect("/");
@@ -41,6 +43,7 @@ const Accounts = {
   },
   logout: {
     handler: function (request, h) {
+      request.cookieAuth.clear();
       return h.redirect("/");
     },
   },
