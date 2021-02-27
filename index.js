@@ -10,6 +10,12 @@ const server = Hapi.server({
   host: "localhost",
 });
 
+server.bind({
+  currentUser: {},
+  users: [],
+  pois: [],
+});
+
 async function init() {
   await server.register(Inert);
   await server.register(Vision);
