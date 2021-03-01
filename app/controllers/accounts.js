@@ -1,4 +1,5 @@
 "use strict";
+const User = require("../models/user");
 
 const Accounts = {
   index: {
@@ -15,11 +16,16 @@ const Accounts = {
   },
   signup: {
     auth: false,
-    handler: function (request, h) {
-      const user = request.payload;
-      this.users[user.email] = user;
-      //this.currentUser = user;
-      request.cookieAuth.set({ id: user.email });
+    handler: async function (request, h) {
+      const payload = request.payload;
+      const newUser = new User({
+        firstName: payload.firstName,
+        lastName: payload.lastName,
+        email: payload.email,
+        password: payload.password,
+      });
+      const user = await newUser.save();
+      request.cookieAuth.set({ id: user.id });
       return h.redirect("/home");
     },
   },
@@ -31,11 +37,14 @@ const Accounts = {
   },
   login: {
     auth: false,
-    handler: function (request, h) {
-      const user = request.payload;
-      if (user.email in this.users && user.password === this.users[user.email].password) {
-        request.cookieAuth.set({ id: user.email });
-        //this.currentUser = this.users[user.email];
+    handler: async function (request, h) {
+      const { email, password } = request.payload;
+      let user = await User.findByEmail(email);
+      if (!user) {
+        return h.redirect("/");
+      }
+      if (user.comparePassword(password)) {
+        request.cookieAuth.set({ id: user.id });
         return h.redirect("/home");
       }
       return h.redirect("/");
