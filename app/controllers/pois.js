@@ -11,7 +11,7 @@ const Pois = {
   },
   allpois: {
     handler: async function (request, h) {
-      const poiList = await Poi.find().lean();
+      const poiList = await Poi.find().populate("user").lean();
       return h.view("allpois", {
         title: "Pois so far",
         pois: poiList,
@@ -29,8 +29,7 @@ const Pois = {
         description: data.description,
         longitude: data.longitude,
         latitude: data.latitude,
-        firstName: user.firstName,
-        lastName: user.lastName,
+        user: user._id,
       });
       await newPoi.save();
       return h.redirect("/allpois");
