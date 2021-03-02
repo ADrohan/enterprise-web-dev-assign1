@@ -1,6 +1,7 @@
 "use strict";
 
 const Poi = require("../models/poi");
+const User = require("../models/user");
 
 const Pois = {
   home: {
@@ -19,6 +20,8 @@ const Pois = {
   },
   addpoi: {
     handler: async function (request, h) {
+      const id = request.auth.credentials.id;
+      const user = await User.findById(id);
       const data = request.payload;
       const newPoi = new Poi({
         name: data.name,
@@ -26,6 +29,8 @@ const Pois = {
         description: data.description,
         longitude: data.longitude,
         latitude: data.latitude,
+        firstName: user.firstName,
+        lastName: user.lastName,
       });
       await newPoi.save();
       return h.redirect("/allpois");
