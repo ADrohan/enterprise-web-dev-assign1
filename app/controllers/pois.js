@@ -20,19 +20,23 @@ const Pois = {
   },
   addpoi: {
     handler: async function (request, h) {
-      const id = request.auth.credentials.id;
-      const user = await User.findById(id);
-      const data = request.payload;
-      const newPoi = new Poi({
-        name: data.name,
-        category: data.category,
-        description: data.description,
-        longitude: data.longitude,
-        latitude: data.latitude,
-        user: user._id,
-      });
-      await newPoi.save();
-      return h.redirect("/allpois");
+      try {
+        const id = request.auth.credentials.id;
+        const user = await User.findById(id);
+        const data = request.payload;
+        const newPoi = new Poi({
+          name: data.name,
+          category: data.category,
+          description: data.description,
+          longitude: data.longitude,
+          latitude: data.latitude,
+          user: user._id,
+        });
+        await newPoi.save();
+        return h.redirect("/allpois");
+      } catch (err) {
+        return h.view("main", { errors: [{ message: err.message }] });
+      }
     },
   },
 };

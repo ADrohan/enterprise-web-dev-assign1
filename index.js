@@ -7,8 +7,14 @@ const Handlebars = require("handlebars");
 const Cookie = require("@hapi/cookie");
 require("./app/models/db");
 const env = require("dotenv");
+const dotenv = require("dotenv");
 
-env.config();
+const result = dotenv.config();
+if (result.error) {
+  console.log(result.error.message);
+  process.exit(1);
+}
+//env.config();
 
 const server = Hapi.server({
   port: 3000,
